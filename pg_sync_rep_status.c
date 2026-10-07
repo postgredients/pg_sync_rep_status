@@ -11,7 +11,7 @@ PG_FUNCTION_INFO_V1(pg_sync_rep_enabled);
 Datum
 pg_sync_rep_enabled(PG_FUNCTION_ARGS)
 {
-	bits8		status;
+	int			status;
 
 	LWLockAcquire(SyncRepLock, LW_SHARED);
 	status = WalSndCtl->sync_standbys_status;
