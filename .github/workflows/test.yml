@@ -1,0 +1,24 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  postgres:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [14, 15, 16, 17, 18, 19]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and test PostgreSQL ${{ matrix.version }}
+        run: |
+          docker run --rm -v "$PWD:/src" -w /src postgres:${{ matrix.version }} bash -ec '
+            apt-get update
+            apt-get install -y --no-install-recommends build-essential postgresql-server-dev-${PG_MAJOR}
+            make PG_CONFIG=/usr/lib/postgresql/${PG_MAJOR}/bin/pg_config
+            make PG_CONFIG=/usr/lib/postgresql/${PG_MAJOR}/bin/pg_config install
+            runuser -u postgres -- env PG_CONFIG=/usr/lib/postgresql/${PG_MAJOR}/bin/pg_config bash tests/test.sh
+          '

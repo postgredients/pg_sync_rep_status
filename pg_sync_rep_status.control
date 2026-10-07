@@ -1,0 +1,4 @@
+comment = 'Report whether PostgreSQL has applied a nonempty synchronous_standby_names'
+default_version = '1.0'
+module_pathname = '$libdir/pg_sync_rep_status'
+relocatable = true
