@@ -4,7 +4,8 @@ A small PostgreSQL extension that reports whether the checkpointer has applied
 a nonempty `synchronous_standby_names` to shared memory. It reads the same
 `SYNC_STANDBY_DEFINED` flag used by the commit wait path, under `SyncRepLock`.
 
-Supports PostgreSQL 14–19. No `shared_preload_libraries` setting is required.
+Supports PostgreSQL 14–18 and PostgreSQL 19 beta 4. No
+`shared_preload_libraries` setting is required.
 
 ## Install
 
@@ -31,4 +32,4 @@ waiting for a specific setting.
 
 `tests/test.sh` starts a temporary PostgreSQL cluster and checks the shared
 memory flag across empty → nonempty → empty transitions. The CI matrix runs
-this test against PostgreSQL 14, 15, 16, 17, 18, and 19.
+this test against PostgreSQL 14, 15, 16, 17, 18, and 19 beta 4.

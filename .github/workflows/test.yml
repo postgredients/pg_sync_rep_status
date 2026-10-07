@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [14, 15, 16, 17, 18, 19]
+        version: [14, 15, 16, 17, 18, 19beta4]
     steps:
       - uses: actions/checkout@v4
       - name: Build and test PostgreSQL ${{ matrix.version }}
